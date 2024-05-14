@@ -1,6 +1,5 @@
 package com.microservices.account.model.entity;
 
-import com.microservices.account.audit.AuditAwareImpl;
 import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;

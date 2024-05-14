@@ -1,0 +1,18 @@
+spring:
+  config:
+    activate:
+      on-profile: "qa"
+
+
+build:
+  version: "2.0"
+
+
+accounts:
+  message: "Welcome to my account microservice qa REST API"
+  contactDetails:
+    name: "Nader Muhammad - JAVA Developer"
+    email: "nader.muhammad@gmail.com"
+  onCallSupport:
+    - 00962729856145
+    - 00962755545533
