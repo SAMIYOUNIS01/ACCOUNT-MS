@@ -7,7 +7,7 @@ import com.microservices.account.mapper.AccountMapper;
 import com.microservices.account.mapper.CustomerMapper;
 import com.microservices.account.model.dto.AccountDto;
 import com.microservices.account.model.dto.CustomerDto;
-import com.microservices.account.model.entity.Account;
+import com.microservices.account.model.entity.Accounts;
 import com.microservices.account.model.entity.Customer;
 import com.microservices.account.repository.AccountRepository;
 import com.microservices.account.repository.CustomerRepository;
@@ -15,7 +15,6 @@ import com.microservices.account.service.IAccountService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.Random;
 
@@ -48,7 +47,7 @@ public class AccountServiceImpl implements IAccountService {
 
         CustomerDto customerDto = new CustomerDto();
         CustomerMapper.mapToCustomerDto(optionalCustomer , customerDto);
-        Account optionalAccount = accountRepository.findByCustomerId(optionalCustomer.getCustomerId()).orElseThrow(
+        Accounts optionalAccount = accountRepository.findByCustomerId(optionalCustomer.getCustomerId()).orElseThrow(
                 () -> new CustomerNotFoundException("Account" , "CustomerId" , optionalCustomer.getCustomerId().toString())
         );
         AccountDto accountDto = new AccountDto();
@@ -65,7 +64,7 @@ public class AccountServiceImpl implements IAccountService {
         AccountDto accountDto = customerDto.getAccountDto();
         boolean isUpdated = false;
         if(accountDto != null){
-            Account account = accountRepository.findById(customerDto.getAccountDto().getAccountNumber()).orElseThrow(
+            Accounts account = accountRepository.findById(customerDto.getAccountDto().getAccountNumber()).orElseThrow(
                     () -> new CustomerNotFoundException(
                             "Account" ,
                             "AccountNumber" ,
@@ -102,6 +101,7 @@ public class AccountServiceImpl implements IAccountService {
                 ()-> new CustomerNotFoundException("Customer" , "mobileNumber" , mobileNumber)
         );
 
+
         accountRepository.deleteByCustomerId(customer.getCustomerId());
         customerRepository.delete(customer);
 
@@ -109,8 +109,8 @@ public class AccountServiceImpl implements IAccountService {
     }
 
 
-    public Account createNewAccount (Customer customer){
-        Account newAccount = new Account();
+    public Accounts createNewAccount (Customer customer){
+        Accounts newAccount = new Accounts();
         newAccount.setAccountType(AccountConstants.SAVINGS);
         Long accountNumber  = 1000000000L + new Random().nextInt(900000000);
         newAccount.setAccountNumber(accountNumber);

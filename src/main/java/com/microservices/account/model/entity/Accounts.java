@@ -14,7 +14,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class Account extends BaseEntity{
+public class Accounts extends BaseEntity{
 
     @Column
     private Long customerId;
